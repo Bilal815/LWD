@@ -31,6 +31,26 @@ ALLOWED_HOSTS = []
 # Wagtail settings
 WAGTAIL_SITE_NAME = 'Ludwin Dieter'
 
+
+# Elastic Search
+
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
+
+# Haystack (for ElasticSearch 7.x):
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,11 +60,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Internal Apps
     'userAccount',
-    'rest_framework',
-    'phonenumber_field',
-    'store',
-    'knox',
+    'products',
     'accounts',
     'blog',
 
@@ -62,6 +81,15 @@ INSTALLED_APPS = [
     'wagtail.core',
     'taggit',
     'modelcluster',
+    
+    # Third-party Apps
+    'django_extensions',
+    'rest_framework',
+    'phonenumber_field',
+    'knox',
+
+    'django_elasticsearch_dsl',
+    'haystack',
 ]
 
 MIDDLEWARE = [
