@@ -63,9 +63,8 @@ INSTALLED_APPS = [
 
     # Internal Apps
     'userAccount',
-    'products',
-    'accounts',
-    'blog',
+    # 'products',
+    # 'blog',
 
     # Wagtail CMS
     'wagtail.contrib.forms',
@@ -91,6 +90,10 @@ INSTALLED_APPS = [
     'django_elasticsearch_dsl',
     'haystack',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
