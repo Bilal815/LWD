@@ -19,8 +19,7 @@ from twilio.base.exceptions import TwilioRestException
 
 from .signals import register_signal
 from .managers import NationalIDImageManager
-from core.models import TimeStampedModel
-from core.handle_images import compress_image
+from model_utils.models import TimeStampedModel
 
 User = get_user_model()
 
@@ -198,5 +197,5 @@ class NationalIDImage(models.Model):
         # if size greater than 300kb then it will send to compress image function
         image = self.image
         if image and image.size > (0.3 * 1024 * 1024):
-            self.image = compress_image(image)
-        super(NationalIDImage, self).save(*args, **kwargs)
+            self.image = image
+        super(NationalIDImage, self).save(*args, **kwargs, quality=75)
